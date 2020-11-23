@@ -5,6 +5,7 @@ import java.util.List;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -14,16 +15,17 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class GameView{
+public class GameView {
 	AnimationTimer timer;
-	MyStage background;
 	Animal animal;
+	MyStage background;
 	
-
 	
-	public void start(Stage primaryStage) throws Exception {
+	
+	GameView() {
 	    background = new MyStage();
-	    Scene scene  = new Scene(background,600,800);
+	   
+	    //Scene scene  = new Scene(background,600,800);
 	    
 		//Obstacle obstacle = new Obstacle("file:src/p4_group_8_repo/truck1Right.png", 25, 25, 3);
 		//Obstacle obstacle1 = new Obstacle("file:src/p4_group_8_repo/truck2Right.png", 100, 100,2 );
@@ -93,8 +95,8 @@ public class GameView{
 		//background.add(obstacle1);
 		//background.add(obstacle2);
 		background.start();
-		primaryStage.setScene(scene);
-		primaryStage.show();
+		//primaryStage.setScene(scene);
+		//primaryStage.show();
 		start();  
 	}
 	public void createTimer() {
@@ -138,4 +140,9 @@ public class GameView{
     		  shift+=30;
     		}
     }
+	public MyStage getBackground() {
+		// TODO Auto-generated method stub
+		return background;
+	}
+
 }

@@ -9,10 +9,11 @@ import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
+import javafx.scene.control.Label;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
@@ -45,20 +46,21 @@ import javafx.scene.text.*;
 import javafx.scene.control.MenuButton;
 
 public class Main extends Application {
-	AnimationTimer timer;
-	MyStage background;
-	Animal animal;
 	
-	private Parent createContent() {
-		Pane root = new Pane();
+	//Pane root = new Pane();
+	MyStage mainBackground;
+	
+	
+	private MyStage createContent() {
+		mainBackground = new MyStage();
 		
-		root.setPrefSize(1050, 600);
+		mainBackground.setPrefSize(600, 800);
 		
 		try(InputStream is = Files.newInputStream(Paths.get("C:\\Users\\User\\Pictures", "frog.jpg"))){
 			ImageView img = new ImageView(new Image(is));
-			img.setFitWidth(1050);
-			img.setFitHeight(600);
-			root.getChildren().add(img);
+			img.setFitWidth(600);
+			img.setFitHeight(800);
+			mainBackground.getChildren().add(img);
 		}
 		catch(IOException e) {
 			System.out.println("Couldn't load image");
@@ -68,27 +70,94 @@ public class Main extends Application {
 		title.setTranslateX(50);
 		title.setTranslateY(200);
 		
+		MyButton button1 = new MyButton("START","Times New Roman", 25, "WHITE");
+		MyButton button2 = new MyButton("GUIDE","Times New Roman", 25, "WHITE");
+		MyButton button3 = new MyButton("QUIT", "Times New Roman", 25, "WHITE");
 		
-		
-		MenuBox vbox = new MenuBox(createStart(), createGuide(), createQuit());
+		VBox vbox = new VBox(button1, button2, button3);
 		vbox.setTranslateX(100);
 		vbox.setTranslateY(300);
+		vbox.setSpacing(30);
 		
-		root.getChildren().addAll(title,vbox);
+		button1.setOnAction(new EventHandler<ActionEvent>() {
+			 public void handle(ActionEvent e) {
+				 GameView gameview = new GameView();
+	    			mainBackground.getScene().setRoot(gameview.getBackground());
+			 }
+		 });
 		
-		return root;
+		
+		button2.setOnAction(new EventHandler<ActionEvent>() {
+			 
+	         @Override
+	         public void handle(ActionEvent event) {
+	 
+	            
+	            Text text1 = new Text("W = ^");
+	            Text text2 = new Text("A = <");
+	            Text text3 = new Text("S = >");
+	            Text text4 = new Text("D = v");
+	            
+	            VBox vbox = new VBox(text1, text2, text3, text4);
+	    		vbox.setTranslateX(10);
+	    		vbox.setTranslateY(10);
+	    		vbox.setSpacing(10);
+	 
+	            StackPane secondaryLayout = new StackPane();
+	            secondaryLayout.getChildren().addAll(vbox);
+	 
+	            Scene secondScene = new Scene(secondaryLayout, 300, 200);
+	 
+	            // New window (Stage)
+	            Stage newWindow = new Stage();
+	            newWindow.setTitle("Guide");
+	            newWindow.setScene(secondScene);
+	 
+	            // Specifies the modality for new window.
+	            newWindow.initModality(Modality.WINDOW_MODAL);
+	 
+	           
+	 
+	            newWindow.show();
+	         }
+	      });
+		
+		button3.setOnAction(new EventHandler<ActionEvent>() {
+			 public void handle(ActionEvent e) {
+				 Stage stage = (Stage) button3.getScene().getWindow(); 
+				 stage.close();
+			 }
+		 });
+		
+		
+		/**MenuBox vbox = new MenuBox(createStart(), createGuide(), createQuit());
+		vbox.setTranslateX(100);
+		vbox.setTranslateY(300);*/
+		
+		mainBackground.getChildren().addAll(title, vbox);
+		
+		return mainBackground;
 		
 	}
 	@Override
-	public void start(Stage primaryStage) throws Exception{
+	public void start(Stage stage){
+		
 		Scene scene = new Scene(createContent());
-		primaryStage.setTitle("Frogger");
-		primaryStage.setScene(scene);
-		primaryStage.show();
+		stage.setTitle("Frogger");
+		stage.setScene(scene);
+		stage.show();
+		//stage.setMaximized(true);
+		//createStart();
 		
 		
+		
+		//createStartButton();
+		//createGuideButton();
+		//createQuitButton();
 	}
 	
+	
+
 	private static class Title extends StackPane{
 		public Title(String name) {
 			Rectangle bg = new Rectangle(375, 60);
@@ -105,7 +174,7 @@ public class Main extends Application {
 		}
 	}
 	
-	private static class MenuBox extends VBox{
+	/**private static class MenuBox extends VBox{
 		public MenuBox(MenuItem...items) {
 			getChildren().add(createSeperator());
 			
@@ -162,16 +231,70 @@ public class Main extends Application {
 				bg.setFill(gradient);
 			});
 			
-			}
+			}*/
 
 		public void setOnAction(EventHandler<ActionEvent> eventHandler) {
 			// TODO Auto-generated method stub
 			
 		}
+		
+	
+	/** public void createStartButton() {
+		 MyButton  btnStart = new MyButton("START", "Berlin Sans FB", 25, "#8FBC8F");
+		 
+		 btnStart.setOnAction(new EventHandler<ActionEvent>() {
+			 public void handle(ActionEvent e) {
+				 GameView gameview = new GameView();
+	    			mainBackground.getScene().setRoot(gameview.getBackground());
+			 }
+		 });
+		 addButton(btnStart);
+	 }
+	 
+	 private void createQuitButton() {
+			Button buttonQuit = new Button("Quit");
+			
+			 addButton(buttonQuit);
+		}
+		private void createGuideButton() {
+			Button buttonGuide = new Button("Guide");
+			 addButton(buttonGuide);
 		}
 	
 	
+	  private void addButton(Button button) {
+		//button.setLayoutX(200);
+		//mainMenuButtons.add(button);
+		mainBackground.getChildren().add(button);
+		
+		
+	}
+	*/
 	
+	/**public MenuItem createStart() {
+	    	MenuItem menuitem1 = new MenuItem("START");
+	    	menuitem1.setOnAction(new EventHandler<ActionEvent>() {
+	    		public void handle(ActionEvent event) {
+	    			
+	    			GameView gameview = new GameView();
+	    			mainBackground.getScene().setRoot(gameview.getBackground());
+	    			
+	    		}
+	    	});
+			return menuitem1;
+	    }
+	    
+	    public MenuItem createGuide() {
+	    	MenuItem menuitem2 = new MenuItem("GUIDE");
+			return menuitem2;
+	    }
+	    
+	    public MenuItem createQuit() {
+	    	MenuItem menuitem3 = new MenuItem("QUIT");
+			return menuitem3;
+	    }*/
+	    
+	    
 	
 	public static void main(String[] args) {
 		launch(args);
@@ -184,24 +307,6 @@ public class Main extends Application {
 
 	
     
-    public MenuItem createStart() {
-    	MenuItem menuitem1 = new MenuItem("START");
-    	menuitem1.setOnAction(new EventHandler<ActionEvent>() {
-    		public void handle(ActionEvent event) {
-    			GameView game = new GameView();
-    		}
-    	});
-		return menuitem1;
-    }
-    
-    public MenuItem createGuide() {
-    	MenuItem menuitem2 = new MenuItem("GUIDE");
-		return menuitem2;
-    }
-    
-    public MenuItem createQuit() {
-    	MenuItem menuitem3 = new MenuItem("QUIT");
-		return menuitem3;
-    }
+  
 
 }
