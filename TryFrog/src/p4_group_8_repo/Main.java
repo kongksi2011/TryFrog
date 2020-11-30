@@ -70,11 +70,12 @@ public class Main extends Application {
 		title.setTranslateX(50);
 		title.setTranslateY(200);
 		
-		MyButton button1 = new MyButton("START","Times New Roman", 25, "WHITE");
-		MyButton button2 = new MyButton("GUIDE","Times New Roman", 25, "WHITE");
-		MyButton button3 = new MyButton("QUIT", "Times New Roman", 25, "WHITE");
+		MyButton button1 = new MyButton("START","Times New Roman", 20, "WHITE");
+		MyButton button2 = new MyButton("GUIDE","Times New Roman", 20, "WHITE");
+		MyButton button3 = new MyButton("QUIT", "Times New Roman", 20, "WHITE");
+		MyButton button4 = new MyButton("SCOREBOARD", "Times New Roman", 20, "WHITE");
 		
-		VBox vbox = new VBox(button1, button2, button3);
+		VBox vbox = new VBox(button1, button2, button4, button3);
 		vbox.setTranslateX(100);
 		vbox.setTranslateY(300);
 		vbox.setSpacing(30);
@@ -128,6 +129,40 @@ public class Main extends Application {
 				 stage.close();
 			 }
 		 });
+		
+		button4.setOnAction(new EventHandler<ActionEvent>() {
+			 
+	         @Override
+	         public void handle(ActionEvent event) {
+	 
+	            
+	            Text text1 = new Text("No records!");
+	           
+	            
+	            
+	            VBox vbox = new VBox(text1);
+	    		vbox.setTranslateX(10);
+	    		vbox.setTranslateY(10);
+	    		vbox.setSpacing(10);
+	 
+	            StackPane secondaryLayout = new StackPane();
+	            secondaryLayout.getChildren().addAll(vbox);
+	 
+	            Scene secondScene = new Scene(secondaryLayout, 300, 200);
+	 
+	            // New window (Stage)
+	            Stage newWindow = new Stage();
+	            newWindow.setTitle("SCOREBOARD");
+	            newWindow.setScene(secondScene);
+	 
+	            // Specifies the modality for new window.
+	            newWindow.initModality(Modality.WINDOW_MODAL);
+	 
+	           
+	 
+	            newWindow.show();
+	         }
+	      });
 		
 		
 		/**MenuBox vbox = new MenuBox(createStart(), createGuide(), createQuit());
@@ -298,6 +333,10 @@ public class Main extends Application {
 	
 	public static void main(String[] args) {
 		launch(args);
+	}
+	public MyStage getBackground() {
+		// TODO Auto-generated method stub
+		return mainBackground;
 	}
 
 	

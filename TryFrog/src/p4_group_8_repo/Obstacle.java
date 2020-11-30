@@ -3,7 +3,7 @@ package p4_group_8_repo;
 import javafx.scene.image.Image;
 
 public class Obstacle extends Actor {
-	private int speed;
+	private double speed;
 	@Override
 	public void act(long now) {
 		move(speed , 0);
@@ -13,11 +13,11 @@ public class Obstacle extends Actor {
 			setX(600);
 	}
 	
-	public Obstacle(String imageLink, int xpos, int ypos, int s, int w, int h) {
+	public Obstacle(String imageLink, int xpos, int ypos, double d, int w, int h) {
 		setImage(new Image(imageLink, w,h, true, true));
 		setX(xpos);
 		setY(ypos);
-		speed = s;
+		speed = d;
 	}
 
 }

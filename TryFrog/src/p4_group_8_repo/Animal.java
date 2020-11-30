@@ -246,6 +246,7 @@ public class Animal extends Actor {
 			//setY(679.8+movement);
 		}
 	}
+	
 	public boolean getStop() {
 		return end==5;
 	}
