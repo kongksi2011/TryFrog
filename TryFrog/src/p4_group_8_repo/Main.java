@@ -44,13 +44,18 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.*;
 import javafx.scene.control.MenuButton;
-
+/**
+ * Main Menu
+ */
 public class Main extends Application {
 	
-	//Pane root = new Pane();
+	
 	MyStage mainBackground;
 	
-	
+	/**
+	 * Create content of main menu
+	 * @return
+	 */
 	private MyStage createContent() {
 		mainBackground = new MyStage();
 		
@@ -73,9 +78,9 @@ public class Main extends Application {
 		MyButton button1 = new MyButton("START","Times New Roman", 20, "WHITE");
 		MyButton button2 = new MyButton("GUIDE","Times New Roman", 20, "WHITE");
 		MyButton button3 = new MyButton("QUIT", "Times New Roman", 20, "WHITE");
-		MyButton button4 = new MyButton("SCOREBOARD", "Times New Roman", 20, "WHITE");
 		
-		VBox vbox = new VBox(button1, button2, button4, button3);
+		
+		VBox vbox = new VBox(button1, button2, button3);
 		vbox.setTranslateX(100);
 		vbox.setTranslateY(300);
 		vbox.setSpacing(30);
@@ -93,13 +98,13 @@ public class Main extends Application {
 	         @Override
 	         public void handle(ActionEvent event) {
 	 
+	            Text text0 = new Text("Welcome to MyFrogger Game!\nThere are 10 levels total which difficulty is increased by level.\nYou are given 5 lifes in each level.\nIn order to win a level, u need to fill each empty place with frog(Total of 5).\nYou will lose a life if u get hit by cars or fall into river so be careful!\nGood Luck!");
+	            Text text1 = new Text("W = Move Up");
+	            Text text2 = new Text("A = Move Left");
+	            Text text3 = new Text("S = Move Right");
+	            Text text4 = new Text("D = Move Down");
 	            
-	            Text text1 = new Text("W = ^");
-	            Text text2 = new Text("A = <");
-	            Text text3 = new Text("S = >");
-	            Text text4 = new Text("D = v");
-	            
-	            VBox vbox = new VBox(text1, text2, text3, text4);
+	            VBox vbox = new VBox(text0, text1, text2, text3, text4);
 	    		vbox.setTranslateX(10);
 	    		vbox.setTranslateY(10);
 	    		vbox.setSpacing(10);
@@ -107,7 +112,7 @@ public class Main extends Application {
 	            StackPane secondaryLayout = new StackPane();
 	            secondaryLayout.getChildren().addAll(vbox);
 	 
-	            Scene secondScene = new Scene(secondaryLayout, 300, 200);
+	            Scene secondScene = new Scene(secondaryLayout, 500, 300);
 	 
 	            // New window (Stage)
 	            Stage newWindow = new Stage();
@@ -130,44 +135,10 @@ public class Main extends Application {
 			 }
 		 });
 		
-		button4.setOnAction(new EventHandler<ActionEvent>() {
-			 
-	         @Override
-	         public void handle(ActionEvent event) {
-	 
-	            
-	            Text text1 = new Text("No records!");
-	           
-	            
-	            
-	            VBox vbox = new VBox(text1);
-	    		vbox.setTranslateX(10);
-	    		vbox.setTranslateY(10);
-	    		vbox.setSpacing(10);
-	 
-	            StackPane secondaryLayout = new StackPane();
-	            secondaryLayout.getChildren().addAll(vbox);
-	 
-	            Scene secondScene = new Scene(secondaryLayout, 300, 200);
-	 
-	            // New window (Stage)
-	            Stage newWindow = new Stage();
-	            newWindow.setTitle("SCOREBOARD");
-	            newWindow.setScene(secondScene);
-	 
-	            // Specifies the modality for new window.
-	            newWindow.initModality(Modality.WINDOW_MODAL);
-	 
-	           
-	 
-	            newWindow.show();
-	         }
-	      });
 		
 		
-		/**MenuBox vbox = new MenuBox(createStart(), createGuide(), createQuit());
-		vbox.setTranslateX(100);
-		vbox.setTranslateY(300);*/
+		
+
 		
 		mainBackground.getChildren().addAll(title, vbox);
 		
@@ -181,14 +152,7 @@ public class Main extends Application {
 		stage.setTitle("Frogger");
 		stage.setScene(scene);
 		stage.show();
-		//stage.setMaximized(true);
-		//createStart();
-		
-		
-		
-		//createStartButton();
-		//createGuideButton();
-		//createQuitButton();
+
 	}
 	
 	
@@ -209,143 +173,24 @@ public class Main extends Application {
 		}
 	}
 	
-	/**private static class MenuBox extends VBox{
-		public MenuBox(MenuItem...items) {
-			getChildren().add(createSeperator());
-			
-			for(MenuItem item : items) {
-				getChildren().addAll(item, createSeperator());
-			}
-		}
-		
-		private Line createSeperator() {
-			Line sep = new Line();
-			sep.setEndX(210);
-			sep.setStroke(Color.DARKGREY);
-			return sep;
-		}
-		
-	}
-	
 
-	private static class MenuItem extends StackPane{
-		public MenuItem(String name) {
-			LinearGradient gradient = new LinearGradient(0, 0, 1, 0, true, CycleMethod.NO_CYCLE, new Stop[] { 
-				new Stop(0, Color.DARKBLUE),
-				new Stop(0.1, Color.BLACK),
-				new Stop(0.9, Color.BLACK),
-				new Stop(1, Color.DARKBLUE)
-				
-			});
-			
-			Rectangle bg = new Rectangle(200,30);
-			bg.setOpacity(0.4);
-			
-			Text text = new Text(name);
-			text.setFill(Color.DARKGREY);
-			text.setFont(Font.font("Times New Roman", FontWeight.SEMI_BOLD,20));
-			
-			setAlignment(Pos.CENTER);
-			getChildren().addAll(bg, text);
-			setOnMouseEntered(event -> {
-				bg.setFill(gradient);
-				text.setFill(Color.WHITE);
-				
-			});
-			
-			setOnMouseExited(event -> {
-				bg.setFill(Color.BLACK);
-				text.setFill(Color.DARKGREY);
-			});
-			setOnMousePressed(event -> {
-				bg.setFill(Color.DARKVIOLET);
-				
-			});
-			
-			setOnMouseReleased(event -> {
-				bg.setFill(gradient);
-			});
-			
-			}*/
 
 		public void setOnAction(EventHandler<ActionEvent> eventHandler) {
 			// TODO Auto-generated method stub
 			
 		}
 		
-	
-	/** public void createStartButton() {
-		 MyButton  btnStart = new MyButton("START", "Berlin Sans FB", 25, "#8FBC8F");
-		 
-		 btnStart.setOnAction(new EventHandler<ActionEvent>() {
-			 public void handle(ActionEvent e) {
-				 GameView gameview = new GameView();
-	    			mainBackground.getScene().setRoot(gameview.getBackground());
-			 }
-		 });
-		 addButton(btnStart);
-	 }
-	 
-	 private void createQuitButton() {
-			Button buttonQuit = new Button("Quit");
-			
-			 addButton(buttonQuit);
-		}
-		private void createGuideButton() {
-			Button buttonGuide = new Button("Guide");
-			 addButton(buttonGuide);
-		}
-	
-	
-	  private void addButton(Button button) {
-		//button.setLayoutX(200);
-		//mainMenuButtons.add(button);
-		mainBackground.getChildren().add(button);
-		
-		
-	}
-	*/
-	
-	/**public MenuItem createStart() {
-	    	MenuItem menuitem1 = new MenuItem("START");
-	    	menuitem1.setOnAction(new EventHandler<ActionEvent>() {
-	    		public void handle(ActionEvent event) {
-	    			
-	    			GameView gameview = new GameView();
-	    			mainBackground.getScene().setRoot(gameview.getBackground());
-	    			
-	    		}
-	    	});
-			return menuitem1;
-	    }
-	    
-	    public MenuItem createGuide() {
-	    	MenuItem menuitem2 = new MenuItem("GUIDE");
-			return menuitem2;
-	    }
-	    
-	    public MenuItem createQuit() {
-	    	MenuItem menuitem3 = new MenuItem("QUIT");
-			return menuitem3;
-	    }*/
 	    
 	    
 	
 	public static void main(String[] args) {
 		launch(args);
 	}
+	
 	public MyStage getBackground() {
 		// TODO Auto-generated method stub
 		return mainBackground;
 	}
 
-	
-	
-
-	
-
-	
-    
-  
 
 }

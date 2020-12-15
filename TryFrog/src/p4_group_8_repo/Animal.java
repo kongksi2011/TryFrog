@@ -18,6 +18,7 @@ public class Animal extends Actor {
 	Image imgA2;
 	Image imgS2;
 	Image imgD2;
+	int lifecount = 5;
 	int points = 0;
 	int end = 0;
 	private boolean second = false;
@@ -29,8 +30,10 @@ public class Animal extends Actor {
 	boolean waterDeath = false;
 	boolean stop = false;
 	boolean changeScore = false;
+	boolean changeLife = false;
 	int carD = 0;
 	double w = 800;
+	
 	ArrayList<End> inter = new ArrayList<End>();
 	public Animal(String imageLink) {
 		setImage(new Image(imageLink, imgSize, imgSize, true, true));
@@ -54,6 +57,7 @@ public class Animal extends Actor {
 					if (event.getCode() == KeyCode.W) {	  
 		                move(0, -movement);
 		                changeScore = false;
+		                changeLife = false;
 		                setImage(imgW1);
 		                second = false;
 		            }
@@ -131,6 +135,10 @@ public class Animal extends Actor {
 		});
 	}
 	
+	public Animal() {
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
 	public void act(long now) {
 		int bounds = 0;
@@ -142,6 +150,7 @@ public class Animal extends Actor {
 			move(movement*2, 0);
 		}
 		if (carDeath) {
+			
 			noMove = true;
 			if ((now)% 11 ==0) {
 				carD++;
@@ -156,6 +165,9 @@ public class Animal extends Actor {
 				setImage(new Image("file:src/p4_group_8_repo/cardeath3.png", imgSize, imgSize, true, true));
 			}
 			if (carD == 4) {
+				lifecount = lifecount - 1;
+				changeLife = true;
+				System.out.println(lifecount);
 				setX(300);
 				setY(679.8+movement);
 				carDeath = false;
@@ -170,6 +182,7 @@ public class Animal extends Actor {
 			
 		}
 		if (waterDeath) {
+			
 			noMove = true;
 			if ((now)% 11 ==0) {
 				carD++;
@@ -187,6 +200,9 @@ public class Animal extends Actor {
 				setImage(new Image("file:src/p4_group_8_repo/waterdeath4.png", imgSize,imgSize , true, true));
 			}
 			if (carD == 5) {
+				lifecount = lifecount - 1;
+				changeLife = true;
+				System.out.println(lifecount);
 				setX(300);
 				setY(679.8+movement);
 				waterDeath = false;
@@ -210,29 +226,74 @@ public class Animal extends Actor {
 		if (getX() == 240 && getY() == 82) {
 			stop = true;
 		}
+		
+		/**
+		 * Adjust frog speed on Log for different levels
+		 */
 		if (getIntersectingObjects(Log.class).size() >= 1 && !noMove) {
-			if(getIntersectingObjects(Log.class).get(0).getLeft())
-				move(-2,0);
-			else
+			if(getIntersectingObjects(Log.class).get(0).s1_getLeft())
+				move(-2 ,0);
+			else if(getIntersectingObjects(Log.class).get(0).s1_getRight())
 				move (.75,0);
+			else if(getIntersectingObjects(Log.class).get(0).s2_getLeft())
+				move (-2.1,0);
+			else if(getIntersectingObjects(Log.class).get(0).s2_getRight())
+				move (.85,0);
+			else if(getIntersectingObjects(Log.class).get(0).s3_getLeft())
+				move (-2.2,0);
+			else if(getIntersectingObjects(Log.class).get(0).s3_getRight())
+				move (.95,0);
+			else if(getIntersectingObjects(Log.class).get(0).s4_getLeft())
+				move (-2.3,0);
+			else if(getIntersectingObjects(Log.class).get(0).s4_getRight())
+				move (1.05,0);
+			else if(getIntersectingObjects(Log.class).get(0).s5_getLeft())
+				move (-2.4,0);
+			else if(getIntersectingObjects(Log.class).get(0).s5_getRight())
+				move (1.15,0);
 		}
+		/**
+		 * Adjust frog speed on Turtle for different levels
+		 */
 		else if (getIntersectingObjects(Turtle.class).size() >= 1 && !noMove) {
-			move(-1,0);
+			if(getIntersectingObjects(Turtle.class).get(0).s1_speed())
+				move(-1 ,0);
+			else if(getIntersectingObjects(Turtle.class).get(0).s2_speed())
+				move(-1.1 ,0);
+			else if(getIntersectingObjects(Turtle.class).get(0).s3_speed())
+				move(-1.2 ,0);
+			else if(getIntersectingObjects(Turtle.class).get(0).s4_speed())
+				move(-1.3 ,0);
+			else if(getIntersectingObjects(Turtle.class).get(0).s5_speed())
+				move(-1.4 ,0);
 		}
+		/**
+		 * Adjust frog speed on Wet Turtle for different levels
+		 */
 		else if (getIntersectingObjects(WetTurtle.class).size() >= 1) {
-			if (getIntersectingObjects(WetTurtle.class).get(0).isSunk()) {
+			if (getIntersectingObjects(WetTurtle.class).get(0).isSunk()) 
 				waterDeath = true;
-			} else {
+			else if(getIntersectingObjects(WetTurtle.class).get(0).s1_speed())
 				move(-1,0);
-			}
+			else if(getIntersectingObjects(WetTurtle.class).get(0).s2_speed())
+				move(-1.1 ,0);
+			else if(getIntersectingObjects(WetTurtle.class).get(0).s3_speed())
+				move(-1.2 ,0);
+			else if(getIntersectingObjects(WetTurtle.class).get(0).s4_speed())
+				move(-1.3 ,0);
+			else if(getIntersectingObjects(WetTurtle.class).get(0).s5_speed())
+				move(-1.4 ,0);
 		}
 		else if (getIntersectingObjects(End.class).size() >= 1) {
 			inter = (ArrayList<End>) getIntersectingObjects(End.class);
 			if (getIntersectingObjects(End.class).get(0).isActivated()) {
+				lifecount = lifecount - 1;
+				System.out.println(lifecount);
 				end--;
 				points-=50;
 			}
 			points+=50;
+			changeLife = true;
 			changeScore = true;
 			w=800;
 			getIntersectingObjects(End.class).get(0).setEnd();
@@ -251,6 +312,14 @@ public class Animal extends Actor {
 		return end==5;
 	}
 	
+	/**
+	 * To stop game if life count becomes 0
+	 * @return
+	 */
+	public boolean getStop2() {
+		return lifecount == 0 ;
+	}
+	
 	public int getPoints() {
 		return points;
 	}
@@ -262,6 +331,27 @@ public class Animal extends Actor {
 		}
 		return false;
 		
+	}
+	
+	/**
+	 * To update life count
+	 * @return
+	 */
+	public boolean changeLife() {
+		if (changeLife) {
+			changeLife = false;
+			return true;
+		}
+		return false;
+		
+	}
+	
+	/**
+	 * To get current life count
+	 * @return
+	 */
+	public int getLife() {
+		return lifecount;
 	}
 	
 

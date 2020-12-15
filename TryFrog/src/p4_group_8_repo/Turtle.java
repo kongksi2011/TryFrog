@@ -40,4 +40,25 @@ public class Turtle extends Actor{
 		speed = s;
 		setImage(turtle2);
 	}
+	
+	public boolean s1_speed() {
+		return speed == -1;
+	}
+	
+	public boolean s2_speed() {
+		return speed == -1.1;
+	}
+	
+	public boolean s3_speed() {
+		return speed == -1.2;
+	}
+	
+	public boolean s4_speed() {
+		return speed == -1.3;
+	}
+	
+	public boolean s5_speed() {
+		return speed == -1.4;
+	}
+	
 }
