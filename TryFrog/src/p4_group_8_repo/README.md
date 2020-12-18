@@ -47,3 +47,5 @@ An alert screen will pop up once player loses all the lives.
 
 #### Methods to increase speed
 Methods to increase speed of obstacles, logs, turtles and wet turtles are added in each java file, and apply them to each insertingObject method in Animal.java.
+
+#### JUnit Tests
