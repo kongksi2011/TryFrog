@@ -1,6 +1,6 @@
 ## Main Menu
 
-![alt text](C:\Users\User\Frogger\Frogger-Arcade-Game-master\MainMenu.jpg)
+![Alt Text](https://raw.githubusercontent.com/kongksi2011/TryFrog/master/TryFrog/src/p4_group_8_repo/MainMenu.png)
 
 Main Menu with 3 options. <br /> **Refer to Main.java**
 #####START.(Press to Start Game)
@@ -11,7 +11,7 @@ Main Menu with 3 options. <br /> **Refer to Main.java**
 
 
 ## Screenshot of Game
-![alt text](C:\Users\User\Frogger\Frogger-Arcade-Game-master\GameSS.jpg)
+![alt text](https://raw.githubusercontent.com/kongksi2011/TryFrog/master/TryFrog/src/p4_group_8_repo/GameSS.png)
 
 ## Main.java
 Contains needs for main menu
