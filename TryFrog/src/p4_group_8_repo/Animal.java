@@ -167,7 +167,6 @@ public class Animal extends Actor {
 			if (carD == 4) {
 				lifecount = lifecount - 1;
 				changeLife = true;
-				System.out.println(lifecount);
 				setX(300);
 				setY(679.8+movement);
 				carDeath = false;
@@ -202,7 +201,6 @@ public class Animal extends Actor {
 			if (carD == 5) {
 				lifecount = lifecount - 1;
 				changeLife = true;
-				System.out.println(lifecount);
 				setX(300);
 				setY(679.8+movement);
 				waterDeath = false;
@@ -288,7 +286,6 @@ public class Animal extends Actor {
 			inter = (ArrayList<End>) getIntersectingObjects(End.class);
 			if (getIntersectingObjects(End.class).get(0).isActivated()) {
 				lifecount = lifecount - 1;
-				System.out.println(lifecount);
 				end--;
 				points-=50;
 			}
